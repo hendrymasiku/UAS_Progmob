@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="rcMhs" type="id" />
+    <item name="txtNimNama" type="id" />
+    <item name="txtEmail" type="id" />
+    <item name="txtAlamat" type="id" />
+    <item name="editText7" type="id" />
+    <item name="textView6" type="id" />
+    <item name="editText6" type="id" />
+    <item name="editText10" type="id" />
+    <item name="editText11" type="id" />
+    <item name="editText8" type="id" />
+    <item name="textView7" type="id" />
+    <item name="editText9" type="id" />
+    <item name="textView8" type="id" />
+    <item name="textView9" type="id" />
+    <item name="textView10" type="id" />
+    <item name="button4" type="id" />
+    <item name="button2" type="id" />
+    <item name="button" type="id" />
+    <item name="editText4" type="id" />
+    <item name="editText5" type="id" />
+    <item name="textView4" type="id" />
+    <item name="editText3" type="id" />
+    <item name="textView3" type="id" />
+    <item name="editText2" type="id" />
+    <item name="textView2" type="id" />
+    <item name="editText" type="id" />
+    <item name="textView" type="id" />
+    <item name="imageButton7" type="id" />
+    <item name="textView22" type="id" />
+    <item name="textView23" type="id" />
+    <item name="imageButton8" type="id" />
+    <item name="textView20" type="id" />
+    <item name="imageButton5" type="id" />
+    <item name="imageButton6" type="id" />
+    <item name="imageButton4" type="id" />
+    <item name="textView21" type="id" />
+    <item name="textView24" type="id" />
+    <item name="imageButton10" type="id" />
+    <item name="emailText" type="id" />
+    <item name="passText" type="id" />
+</resources>
