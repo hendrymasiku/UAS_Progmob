@@ -40,4 +40,5 @@
     <item name="imageButton10" type="id" />
     <item name="emailText" type="id" />
     <item name="passText" type="id" />
+    <item name="editText30" type="id" />
 </resources>
