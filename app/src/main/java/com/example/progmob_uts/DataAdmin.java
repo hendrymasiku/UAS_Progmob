@@ -33,7 +33,7 @@ public class DataAdmin extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int which) {
                                 Intent intent = new Intent(DataAdmin.this, menu_admin.class);
                                 startActivity(intent);
-                                Toast.makeText(DataAdmin.this, "Berhasil menyimpan", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DataAdmin.this, "Berhasil Menyimpan", Toast.LENGTH_SHORT).show();
                             }
                         });
                 AlertDialog dialog = builder.create();
