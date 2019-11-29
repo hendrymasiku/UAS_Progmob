@@ -99,9 +99,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void deleteDosen() {
-        Call<DefaultResult> call = data_DosenService.deleteDosen("Dendy", "809010");
+    private void updateDosen() {
+        Call<DefaultResult> call = data_DosenService.updateDosen("Arnold", "000033", "Demangan", "gmail.com", "S.Kom", "Upload", "3");
         call.enqueue(new Callback<DefaultResult>() {
             @Override
             public void onResponse(Call<DefaultResult> call, Response<DefaultResult> response) {
@@ -115,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void updateDosen() {
-        Call<DefaultResult> call = data_DosenService.updateDosen("Arnold", "000033", "Demangan", "gmail.com", "S.Kom", "Upload", "3");
+    private void deleteDosen() {
+        Call<DefaultResult> call = data_DosenService.deleteDosen("Dendy", "809010");
         call.enqueue(new Callback<DefaultResult>() {
             @Override
             public void onResponse(Call<DefaultResult> call, Response<DefaultResult> response) {
