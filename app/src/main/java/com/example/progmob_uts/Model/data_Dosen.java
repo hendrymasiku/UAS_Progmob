@@ -15,6 +15,7 @@ public class data_Dosen {
     //public String gelar;
     //public String alamat;
     //public String email;
+
         public data_Dosen(String nidnNama, String gelar, String alamat, String email) {
             this.nidnNama = nidnNama;
             this.gelar = gelar;

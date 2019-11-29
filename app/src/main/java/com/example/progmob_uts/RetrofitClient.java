@@ -7,7 +7,6 @@ public class RetrofitClient {
     private static Retrofit retrofit;
     public static final String BASE_URL ="https://kpsi.fti.ukdw.ac.id/";
 
-    //design patern singleton
     public static Retrofit getRetrofitInstance()
     {
         if(retrofit==null)
