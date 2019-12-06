@@ -1,12 +1,23 @@
 package com.example.progmob_uts;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Base64;
 import android.widget.Toast;
 
 import com.example.progmob_uts.Model.data_Mhs;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.net.ContentHandler;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,63 +36,12 @@ public class MainActivity extends AppCompatActivity {
                 .create(DataDosenService.class);
         data_MhsService = RetrofitClient.getRetrofitInstance()
                 .create(DataMahasiswaService.class);
-        getAllDataDosen();
-        getAllDataMHS();
+
+
     }
 
-    private void getAllDataDosen() {
-        Call<List<com.example.progmob_uts.Model.data_Dosen>> call = DataDosenService.getDosenAll("1");
-        call.enqueue(new Callback<List<com.example.progmob_uts.Model.data_Dosen>>() {
-            @Override
-            public void onResponse(Call<List<com.example.progmob_uts.Model.data_Dosen>> call, Response<List<com.example.progmob_uts.Model.data_Dosen>> response) {
-                for (com.example.progmob_uts.Model.data_Dosen dosen : response.body()) {
-                    System.out.println("NidnNama : " + dosen.getNidnNama());
-                    System.out.println("Gelar : " + dosen.getGelar());
-                }
 
-            }
 
-            @Override
-            public void onFailure(Call<List<com.example.progmob_uts.Model.data_Dosen>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "somethig wrong.... ", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void getAllDataMHS() {
-        Call<List<data_Mhs>> call = DataMahasiswaService.getMhsAll("1");
-        call.enqueue(new Callback<List<data_Mhs>>() {
-            @Override
-            public void onResponse(Call<List<data_Mhs>> call, Response<List<data_Mhs>> response) {
-                for (data_Mhs mahasiswa : response.body()) {
-                    System.out.println("nimNama : " + mahasiswa.getNimNama());
-                    System.out.println("Alamat : " + mahasiswa.getAlamat());
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<List<data_Mhs>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "somethig wrong.... ", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void getAllDataMHS() {
-        Call<List<DefaultResult>> call = DataMahasiswaService.getMhsAll("1");
-        call.enqueue(new Callback<List<DefaultResult>>() {
-            @Override
-            public void onResponse(Call<List<DefaultResult>> call, Response<List<DefaultResult>> response) {
-                for (DefaultResult mahasiswa : response.body()) {
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<DefaultResult>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "somethig wrong.... ", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 
     private void insertDosen() {
         Call<DefaultResult> call = data_DosenService.insertDosen("Hendry", "72150066", "Seturan", "gmail.com", "S.Kom, MM", "Upload", "72150066");
@@ -99,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void updateDosen() {
         Call<DefaultResult> call = data_DosenService.updateDosen("Arnold", "000033", "Demangan", "gmail.com", "S.Kom", "Upload", "3");
         call.enqueue(new Callback<DefaultResult>() {
@@ -114,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void deleteDosen() {
         Call<DefaultResult> call = data_DosenService.deleteDosen("Dendy", "809010");
         call.enqueue(new Callback<DefaultResult>() {
@@ -129,5 +91,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-}
 
+    private boolean checkPermision() {
+        int result = ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE);
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+
+        //menambahkan image//
+        private void insertDosenWithFoto(){
+        File sdcard = Environment.getExternalStorageDirectory();
+        String imageToSend = null;
+
+
+        File file = new File(sdcard, "/Download/images.jpg");
+
+        if (file.exists()) {
+            if (!checkPermision()) {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        1);
+
+            }
+
+            Bitmap imageBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] bytes = baos.toByteArray();
+            imageToSend = Base64.encodeToString(bytes, Base64.DEFAULT);
+
+        }
+
+        Call<DefaultResult> call = data_DosenService.insertDosenWithFoto("Hendry", "72150066", "Seturan", "gmail.com", "S.Kom, MM", imageToSend, "72150066");
+        call.enqueue(new Callback<DefaultResult>() {
+            @Override
+            public void onResponse(Call<DefaultResult> call, Response<DefaultResult> response) {
+                System.out.println(response.body().getStatus());
+            }
+
+            @Override
+            public void onFailure(Call<DefaultResult> call, Throwable t) {
+                System.out.println("message :" + t.getMessage());
+                Toast.makeText(MainActivity.this, "Something Went Wrong...Please Try Later!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+}
