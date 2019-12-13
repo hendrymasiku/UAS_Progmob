@@ -25,7 +25,7 @@ public interface DataDosenService {
                                            @Field("email") String email,
                                            @Field("gelar") String gelar,
                                            @Field("foto") String foto,
-                                           @Field("nim_progmob") String nim_progmob);
+                                           @Field("id") String id);
 
     @FormUrlEncoded
     @POST("api/progmob/dosen/update")
@@ -35,7 +35,7 @@ public interface DataDosenService {
                                     @Field("email") String email,
                                     @Field("gelar") String gelar,
                                     @Field("foto") String foto,
-                                    @Field("nim_progmob") String nim_progmob);
+                                    @Field("id") String id);
 
     @FormUrlEncoded
     @POST("api/progmob/dosen/delete")

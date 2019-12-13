@@ -18,4 +18,7 @@ public class data_mahasiswa extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_mahasiswa);
     }
+
+
+
 }
